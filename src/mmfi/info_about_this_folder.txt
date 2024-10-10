@@ -1,0 +1,2 @@
+The code in this folder belongs to the MM-Fi database interface.
+The original repository of the database can be found in: https://github.com/ybhbingo/MMFi_dataset
