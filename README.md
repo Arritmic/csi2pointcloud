@@ -53,7 +53,8 @@ If you are using Windows, use the _environment.yml_ file to install the dependen
 
 ## TODO List
  - [X] Add CSI2PointCloud Model Architecture
- - [X] Add training and testing scripts
+ - [X] Add training scripts
+ - [ ] Add testing scripts (inference)
  - [ ] Evaluation of the model on additional datasets
  - [ ] Extend the transformer architecture to multi-modal inputs (e.g., integrating camera or LiDAR data)
  - [ ] Implementation of a user-friendly GUI for visualizing point cloud data
