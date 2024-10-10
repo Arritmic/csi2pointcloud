@@ -1,0 +1,23 @@
+name: CSI2PointCloud
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.10
+  - pip
+  - pytorch
+  - cudatoolkit=11.8  # Specify the version of CUDA compatible with your GPU
+  - torchvision
+  - torchaudio
+  - numpy
+  - pandas
+  - scikit-learn
+  - pip:
+      - opencv-python
+      - opencv-contrib-python
+      - imutils
+      - matplotlib
+      - scipy
+      - tensorboard
+      - tqdm
+      - pyyaml
