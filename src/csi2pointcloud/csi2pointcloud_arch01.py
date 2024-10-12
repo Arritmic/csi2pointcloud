@@ -73,6 +73,96 @@ class OutputProjection(nn.Module):
         return output_points
 
 
+class CSISTNkd(nn.Module):
+    def __init__(self, k=64):
+        super(CSISTNkd, self).__init__()
+        self.conv1 = nn.Conv1d(k, 128, 1)
+        self.conv2 = nn.Conv1d(128, 256, 1)
+        self.conv3 = nn.Conv1d(256, 1024, 1)
+        self.fc1 = nn.Linear(1024, 512)
+        self.fc2 = nn.Linear(512, 256)
+        self.fc3 = nn.Linear(256, k * k)
+        self.relu = nn.ReLU()
+
+        self.bn1 = nn.BatchNorm1d(128)
+        self.bn2 = nn.BatchNorm1d(256)
+        self.bn3 = nn.BatchNorm1d(1024)
+        self.bn4 = nn.BatchNorm1d(512)
+        self.bn5 = nn.BatchNorm1d(256)
+
+        self.k = k
+
+    def forward(self, x):
+        batchsize = x.size(0)
+        x = F.relu(self.bn1(self.conv1(x)))  # [batchsize, 128, n_pts]
+        x = F.relu(self.bn2(self.conv2(x)))  # [batchsize, 256, n_pts]
+        x = F.relu(self.bn3(self.conv3(x)))  # [batchsize, 1024, n_pts]
+        x = torch.max(x, 2, keepdim=True)[0]  # [batchsize, 1024, 1]
+        x = x.view(-1, 1024)  # [batchsize, 1024]
+
+        x = F.relu(self.bn4(self.fc1(x)))  # [batchsize, 512]
+        x = F.relu(self.bn5(self.fc2(x)))  # [batchsize, 256]
+        x = self.fc3(x)  # [batchsize, k * k]
+
+        iden = torch.eye(self.k, device=x.device).view(1, self.k * self.k).repeat(batchsize, 1)  # Identity matrix
+        x = x + iden
+        x = x.view(-1, self.k, self.k)  # [batchsize, k, k]
+        return x
+
+
+# Improved PointNet??
+class CSI2PointNetDecoder(nn.Module):
+    def __init__(self, embedding_dim, feature_transform=False):
+        super(CSI2PointNetDecoder, self).__init__()
+        self.feature_transform = feature_transform
+        self.stn = CSISTNkd(k=embedding_dim)
+        self.conv1 = nn.Conv1d(embedding_dim, 512, 1)
+        self.conv2 = nn.Conv1d(512, 256, 1)
+        self.conv3 = nn.Conv1d(256, 128, 1)
+        self.conv4 = nn.Conv1d(128, 64, 1)
+        self.conv5 = nn.Conv1d(64, 3, 1)  # Output 3D coordinates
+
+        self.bn1 = nn.BatchNorm1d(512)
+        self.bn2 = nn.BatchNorm1d(256)
+        self.bn3 = nn.BatchNorm1d(128)
+        self.bn4 = nn.BatchNorm1d(64)
+
+        # Residual connections
+        self.residual_fc = nn.Sequential(
+            nn.Linear(embedding_dim, 128),  # Match the dimension to the main path
+            nn.LeakyReLU(),
+            nn.Linear(128, 128)
+        )
+
+    def forward(self, point_embeddings):
+        # point_embeddings: [batch_size, num_points, embedding_dim]
+        x = point_embeddings.permute(0, 2, 1)  # [batch_size, embedding_dim, num_points]
+        batchsize = x.size(0)
+        n_pts = x.size(2)
+
+        if self.feature_transform:
+            trans_feat = self.stn(x)
+            x = x.transpose(2, 1)  # [batchsize, num_points, embedding_dim]
+            x = torch.bmm(x, trans_feat)  # Apply feature transformation
+            x = x.transpose(2, 1)  # [batchsize, embedding_dim, num_points]
+        else:
+            trans_feat = None
+
+        # PointNet Layers with BatchNorm and ReLU
+        x = F.leaky_relu(self.bn1(self.conv1(x)))  # [batchsize, 512, num_points]
+        x = F.leaky_relu(self.bn2(self.conv2(x)))  # [batchsize, 256, num_points]
+
+        residual = self.residual_fc(point_embeddings)  # [batchsize, num_points, 128]
+        residual = residual.permute(0, 2, 1)  # Match dimensions for addition with x
+
+        x = F.leaky_relu(self.bn3(self.conv3(x)) + residual)  # [batchsize, 128, num_points]
+        x = F.leaky_relu(self.bn4(self.conv4(x)))  # [batchsize, 64, num_points]
+        x = self.conv5(x)  # [batchsize, 3, num_points]
+        x = x.permute(0, 2, 1)  # [batchsize, num_points, 3]
+
+        return x, trans_feat
+
+
 class CSI2PointCloudModel(nn.Module):
     def __init__(self, embedding_dim, num_heads, num_encoder_layers, num_decoder_layers, num_points,
                  num_antennas=3, num_subcarriers=114, num_time_slices=10):
@@ -82,6 +172,7 @@ class CSI2PointCloudModel(nn.Module):
         self.num_antennas = num_antennas
         self.num_subcarriers = num_subcarriers
         self.num_time_slices = num_time_slices
+        self.num_heads = num_heads
 
         # Input Encoding
         # self.linear_proj = nn.Linear(num_time_slices * 2, embedding_dim)
@@ -155,4 +246,4 @@ class CSI2PointCloudModel(nn.Module):
         # Output Projection
         output_points = self.output_proj(point_embeddings)  # Shape: [batch_size, num_points, 3]
 
-        return output_points
+        return output_points, encoder_output
