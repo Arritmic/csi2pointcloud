@@ -42,7 +42,7 @@ cross_subject_split:
     subjects: [ S05, S10, S15, S20, S25, S30, S35, S40 ]
     actions: all
 
-manual_split:
+manual_split_or:
   train_dataset:
     split: training
     scenes: None
@@ -54,7 +54,7 @@ manual_split:
     subjects: [S01, S02, S03, S04, S05, S06, S07, S08, S09, S10, S11, S12, S13, S14, S15, S16, S17, S18, S19, S20, S21, S22, S23, S24, S25, S26, S27, S28, S29, S30, S31, S32, S33, S34, S35, S36, S37, S38, S39, S40]
     actions: [A22, A23, A24, A25, A26, A27]
 
-temp_split:
+manual_split:
   train_dataset:
     split: training
     scenes: None
@@ -66,11 +66,11 @@ temp_split:
     subjects: [S01, S02]
     actions: [A01, A03, A04]
 
-split_to_use: temp_split
+split_to_use: manual_split
 
 init_rand_seed: 0
 train_loader:
-  batch_size: 16
+  batch_size: 24
 validation_loader:
   batch_size: 8
 output_folder: ./ckpt/
