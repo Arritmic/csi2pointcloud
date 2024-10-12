@@ -6,6 +6,11 @@ __pycache__/
 # C extensions
 *.so
 
+# Deep Learning objects
+*.pth
+models/checkpoints/*.pth
+models/*.pth
+
 # Distribution / packaging
 .Python
 build/
