@@ -2,16 +2,25 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-green.svg)](https://www.python.org/downloads/release/python-380/)
 
+The repository contains the official implementation for the paper **"Spatio-Temporal 3D Point Clouds from WiFi-CSI Data via Transformer Networks"**.
+
+[**[Paper]**](https://arxiv.org/abs/2410.16303)
+
+Authors: Tuomas Määttä, Sasan Sharifipour, Miguel Bordallo López, Constantino Álvarez Casado
+
+
+
+
 This project aims to estimate 3D point clouds of indoor environments using non-contact sensing via WiFi Channel State Information (CSI)
 data obtained through Multiple-Input Multiple-Output (MIMO) configurations. By leveraging a transformer-based architecture, 
 the system processes temporal CSI data, including both amplitude and phase information, from multiple transmitters and receivers 
 to generate accurate and detailed 3D reconstructions of indoor spaces.
 
-The approach effectively captures the spatial and temporal dynamics of the environment, enabling precise modeling of human presence 
+The approach effectively captures the spatial and temporal dynamics of the environment, enabling modeling of human presence 
 and movement within various indoor settings. The system is evaluated on the MM-Fi dataset [1], which comprises comprehensive CSI 
 measurements reflecting human activities across diverse indoor environments.
 
-This repository contains the implementation code for the paper titled “[Your Paper Title Here]” available on arXiv. 
+This repository contains the implementation code for the paper titled “Spatio-Temporal 3D Point Clouds from WiFi-CSI Data via Transformer Networks” available on arXiv. 
 You can access the full details and experimental results in the published work.
 
 ![cover](docs/images/prediction_subject_split.jpg)
@@ -56,12 +65,23 @@ If you are using Windows, use the _environment.yml_ file to install the dependen
  - [X] Add training scripts
  - [ ] Add testing scripts (inference)
  - [ ] Evaluation of the model on additional datasets
- - [ ] Extend the transformer architecture to multi-modal inputs (e.g., integrating camera or LiDAR data)
  - [ ] Implementation of a user-friendly GUI for visualizing point cloud data
- - [ ] Integration of real-time processing capabilities for adaptive monitoring
- - [ ] Code optimization for deployment on edge devices
  - [ ] Improved data augmentation strategies to enhance model generalizability
  - [ ] Code refactoring and enhanced documentation for ease of use
+
+
+## 🔖 Citation
+```
+@misc{määttä2024spatiotemporal3dpointclouds,
+      title={Spatio-Temporal 3D Point Clouds from WiFi-CSI Data via Transformer Networks}, 
+      author={Tuomas Määttä and Sasan Sharifipour and Miguel Bordallo López and Constantino Álvarez Casado},
+      year={2024},
+      eprint={2410.16303},
+      archivePrefix={arXiv},
+      primaryClass={eess.SP},
+      url={https://arxiv.org/abs/2410.16303}, 
+}
+```
 
 ## Authors and Acknowledgment
 This project is developed by the Multimodal Sensing Lab (MMSLab) team of the Center for Machine Vision and Signal Analysis (CMVS) 
