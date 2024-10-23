@@ -72,7 +72,7 @@ If you are using Windows, use the _environment.yml_ file to install the dependen
 
 ##  Citation
 ```
-@misc{määttä2024spatiotemporal3dpointclouds,
+@misc{määttä2024csi2pointcloud,
       title={Spatio-Temporal 3D Point Clouds from WiFi-CSI Data via Transformer Networks}, 
       author={Tuomas Määttä and Sasan Sharifipour and Miguel Bordallo López and Constantino Álvarez Casado},
       year={2024},
