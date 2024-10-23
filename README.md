@@ -9,7 +9,7 @@ The repository contains the official implementation for the paper **"Spatio-Temp
 Authors: Tuomas Määttä, Sasan Sharifipour, Miguel Bordallo López, Constantino Álvarez Casado
 
 
-
+![cover](docs/images/prediction_subject_split.jpg)
 
 This project aims to estimate 3D point clouds of indoor environments using non-contact sensing via WiFi Channel State Information (CSI)
 data obtained through Multiple-Input Multiple-Output (MIMO) configurations. By leveraging a transformer-based architecture, 
@@ -23,7 +23,7 @@ measurements reflecting human activities across diverse indoor environments.
 This repository contains the implementation code for the paper titled “Spatio-Temporal 3D Point Clouds from WiFi-CSI Data via Transformer Networks” available on arXiv. 
 You can access the full details and experimental results in the published work.
 
-![cover](docs/images/prediction_subject_split.jpg)
+
 
 ## Abstract
 Joint communication and sensing (JC&S) is emerging as a key component in 5G and 6G networks, enabling dynamic adaptation 
