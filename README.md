@@ -8,6 +8,7 @@ The repository contains the official implementation for the paper **"Spatio-Temp
 
 [**[Models]**](https://drive.google.com/drive/folders/1U9hMGtMoQWgP_Obi5k1Vts_WbEHi85Vi?usp=sharing) - Available checkpoints files for testing.
 
+[**[Video]**](https://www.youtube.com/watch?v=vH6PyjHoH-w) - Video demonstrating the inference of the model.
 
 Authors: Tuomas Määttä, Sasan Sharifipour, Miguel Bordallo López, Constantino Álvarez Casado
 
