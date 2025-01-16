@@ -421,7 +421,7 @@ def main():
     #       LOAD DATASET        #
     #############################
     yaml_config_file = "../data/configurations/config_mmfi_csi2pointcloud.yaml"
-    # dataset_root = "/media/arritmic/MMST003/DATABASES/Joint_Comm_and_Sensing/MMFI-Dataset/data3"
+    # dataset_root = "/media/arritmic/MMST003/DATABASES/Joint_Comm_and_Sensing/MMFI-Dataset/data"
     dataset_root = "/path/to/the/MMFI-Dataset/data"
     print(f"  * Config file: {yaml_config_file}")
     print(f"  * Dataset path: {dataset_root}")
@@ -439,6 +439,7 @@ def main():
     print(f"    >> [CSI2PC Train] Trainset samples: {len(train_loader)}. Batch size: {config['train_loader']['batch_size']}")
     print(f"    >> [CSI2PC Train] Testset samples: {len(val_loader)}")
     print(f"    >> [CSI2PC Train] Selected data split: {config['split_to_use']}")
+
 
     #############################
     #     DATA AUGMENTATION     #
@@ -470,6 +471,7 @@ def main():
 
     print(f"    >> [CSI2PC Train] Trainset samples (DA): {len(train_loader)}")
     print(f"    >> [CSI2PC Train] Testset samples (DA): {len(val_loader)}")
+
 
 
     #############################
