@@ -4,7 +4,10 @@
 
 The repository contains the official implementation for the paper **"Spatio-Temporal 3D Point Clouds from WiFi-CSI Data via Transformer Networks"**.
 
-[**[Paper]**](https://arxiv.org/abs/2410.16303)
+[**[Paper]**](https://arxiv.org/abs/2410.16303) - Accepted in 5th IEEE International Symposium on Joint Communications & Sensing (JC&S 2025).
+
+[**[Models]**](https://drive.google.com/drive/folders/1U9hMGtMoQWgP_Obi5k1Vts_WbEHi85Vi?usp=sharing) - Available checkpoints files for testing.
+
 
 Authors: Tuomas Määttä, Sasan Sharifipour, Miguel Bordallo López, Constantino Álvarez Casado
 
@@ -63,7 +66,7 @@ If you are using Windows, use the _environment.yml_ file to install the dependen
 ## TODO List
  - [X] Add CSI2PointCloud Model Architecture
  - [X] Add training scripts
- - [ ] Add testing scripts (inference)
+ - [X] Add testing scripts (inference)
  - [ ] Evaluation of the model on additional datasets
  - [ ] Implementation of a user-friendly GUI for visualizing point cloud data
  - [ ] Improved data augmentation strategies to enhance model generalizability
