@@ -127,9 +127,10 @@ class MMFi_Database:
 
 
 class MMFi_Dataset(Dataset):
-    def __init__(self, data_base, data_unit, modality, split, data_form, subsampling=1, fixed_lidar_points=1000):
+    def __init__(self, data_base, data_unit, modality, split, data_form, subsampling=1, fixed_lidar_points=1000, frame_limit=297):
         self.num_points = fixed_lidar_points
         self.subsampling = subsampling
+        self.frame_num = frame_limit
         self.data_base = data_base
         self.data_unit = data_unit
         self.modality = modality.split('|')
@@ -183,9 +184,9 @@ class MMFi_Dataset(Dataset):
                                                          action, mod)
                     data_info.append(data_dict)
                 elif self.data_unit == 'frame':
-                    frame_num = 297
+                    # frame_num = 297
                     # for idx in range(frame_num):
-                    for idx in range(0, frame_num, self.subsampling):
+                    for idx in range(0, self.frame_num, self.subsampling):
                         data_dict = {'modality': self.modality,
                                      'scene': self.get_scene(subject),
                                      'subject': subject,
@@ -568,14 +569,14 @@ class MMFi_Dataset(Dataset):
         return sample
 
 
-def make_dataset(dataset_root, config, subsampling=None, fixed_lidar_points=None):
+def make_dataset(dataset_root, config, subsampling=1, fixed_lidar_points=1000, frame_limit=297):
     # [MMSLab team] Added subsampling to get only 1 frame every X frames.
     # [MMSLab team] Added fixed lidar points, because they vary among users and activities.
 
     database = MMFi_Database(dataset_root)
     config_dataset = decode_config(config)
-    train_dataset = MMFi_Dataset(database, config['data_unit'], **config_dataset['train_dataset'])
-    val_dataset = MMFi_Dataset(database, config['data_unit'], **config_dataset['val_dataset'])
+    train_dataset = MMFi_Dataset(database, config['data_unit'], **config_dataset['train_dataset'], subsampling=subsampling, fixed_lidar_points=fixed_lidar_points)
+    val_dataset = MMFi_Dataset(database, config['data_unit'], **config_dataset['val_dataset'], subsampling=subsampling, fixed_lidar_points=fixed_lidar_points, frame_limit=frame_limit)
     return train_dataset, val_dataset
 
 
