@@ -4,7 +4,7 @@
 
 The repository contains the official implementation for the paper **"Spatio-Temporal 3D Point Clouds from WiFi-CSI Data via Transformer Networks"**.
 
-[**[Paper]**]([https://arxiv.org/abs/2410.16303](https://ieeexplore.ieee.org/abstract/document/10880635)) - 5th IEEE International Symposium on Joint Communications & Sensing (JC&S 2025).
+[**[Paper]**](https://ieeexplore.ieee.org/abstract/document/10880635) - 5th IEEE International Symposium on Joint Communications & Sensing (JC&S 2025).
 
 [**[Arxiv]**](https://arxiv.org/abs/2410.16303) - Arxiv version
 
