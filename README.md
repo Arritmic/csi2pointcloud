@@ -78,14 +78,13 @@ If you are using Windows, use the _environment.yml_ file to install the dependen
 
 ##  Citation
 ```
-@misc{määttä2024csi2pointcloud,
-      title={Spatio-Temporal 3D Point Clouds from WiFi-CSI Data via Transformer Networks}, 
-      author={Tuomas Määttä and Sasan Sharifipour and Miguel Bordallo López and Constantino Álvarez Casado},
-      year={2024},
-      eprint={2410.16303},
-      archivePrefix={arXiv},
-      primaryClass={eess.SP},
-      url={https://arxiv.org/abs/2410.16303}, 
+@inproceedings{maatta2025spatio,
+  title={Spatio-Temporal 3D Point Clouds from Wi-Fi-CSI Data via Transformer Networks},
+  author={Määttä, Tuomas and Sharifipour, Sasan and Bordallo López, Miguel and Álvarez Casado, Constantino},
+  booktitle={2025 IEEE 5th International Symposium on Joint Communications \& Sensing (JC\&S)},
+  pages={1--6},
+  year={2025},
+  organization={IEEE}
 }
 ```
 
